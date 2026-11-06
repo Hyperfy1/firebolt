@@ -26,11 +26,14 @@ RUN --mount=type=cache,target=/root/.npm \
 
 FROM dependencies AS build
 COPY packages ./packages
-# Build the packages the website uses, then the website itself.
+# Build the packages the website uses, then the website itself. The website
+# build calls firebolt's dist directly: npm ci ran before dist existed, so on
+# Linux it never linked the `firebolt` bin.
 RUN npm run build \
       -w packages/css -w packages/jsx -w packages/firebolt \
       -w packages/icons -w packages/cors -w packages/snap \
-    && npm run build -w packages/website
+    && cd packages/website \
+    && node ../firebolt/dist/index.js build
 
 FROM base AS production
 # Chromium renders the /og share images via @firebolt-dev/snap.
