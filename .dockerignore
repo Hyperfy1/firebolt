@@ -1,0 +1,18 @@
+# Only send build inputs. Dependencies, build output, local env files and
+# Git history never enter the Docker build context.
+**
+!Dockerfile
+!.dockerignore
+!package.json
+!package-lock.json
+!packages/
+!packages/**
+
+**/node_modules
+**/dist
+**/.firebolt
+**/.env
+**/.env.*
+**/.DS_Store
+packages/website/Dockerfile
+packages/website/fly.toml
