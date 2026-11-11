@@ -9,7 +9,7 @@
     "packages/*"
   ],
   "dependencies": {
-    "inquirer": "^9.2.15",
+    "inquirer": "^9.3.8",
     "prettier": "^3.2.5"
   },
   "overrides": {
